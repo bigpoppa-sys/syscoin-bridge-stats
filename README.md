@@ -1,2 +1,2 @@
-# data-points-syscoin-bridge
+# syscoin-bridge-data-points
  Syscoin < = > Ethereum Bridge Data Points
