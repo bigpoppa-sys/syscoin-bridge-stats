@@ -134,4 +134,6 @@ app.get('/statsSYS',(req,res)=>{
 
 app.listen(3000, () => {
  console.log("Bridge Stats now live");
+ console.log("View at localhost:3000/statsETH");
+ console.log("View at localhost:3000/statsSYS");
 });
