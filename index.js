@@ -9,6 +9,8 @@ let ethUsd = 0;
 let ethBtc = 0;
 let sysUsd = 0;
 let sysBtc = 0;
+let sysFive = 0;
+let ethFive = 0;
 
 function calcsEth(){ 
     let gasLimit = 21000;
@@ -23,7 +25,7 @@ function calcsEth(){
     let five = 1000000;
     let six = 10000000;
 
-    return [{
+    return{
 
         price:{
                 usd: Number(ethUsd).toFixed(2),
@@ -45,33 +47,33 @@ function calcsEth(){
 
         tx_costs_usd:{
             low: {
-                '5k': (Number(gasLowCal)*one).toFixed(2),
-                '25k': (Number(gasLowCal)*two).toFixed(2),
-                '100k': (Number(gasLowCal)*three).toFixed(2),
-                '500k': (Number(gasLowCal)*four).toFixed(2),
-                '1m': (Number(gasLowCal)*five).toFixed(2),
-                '10m': (Number(gasLowCal)*six).toFixed(2)  
+                'five_k': (Number(gasLowCal)*one).toFixed(2),
+                'twenty_five_k': (Number(gasLowCal)*two).toFixed(2),
+                'one_hundred_k': (Number(gasLowCal)*three).toFixed(2),
+                'five_hundred_k': (Number(gasLowCal)*four).toFixed(2),
+                'one_mil': (Number(gasLowCal)*five).toFixed(2),
+                'ten_mil': (Number(gasLowCal)*six).toFixed(2)  
             },
 
             std: {
-                '5k': (Number(gasAvgCal)*one).toFixed(2),
-                '25k': (Number(gasAvgCal)*two).toFixed(2),
-                '100k': (Number(gasAvgCal)*three).toFixed(2),
-                '500k': (Number(gasAvgCal)*four).toFixed(2),
-                '1m': (Number(gasAvgCal)*five).toFixed(2),
-                '10m': (Number(gasAvgCal)*six).toFixed(2)
+                'five_k': (Number(gasAvgCal)*one).toFixed(2),
+                'twenty_five_k': (Number(gasAvgCal)*two).toFixed(2),
+                'one_hundred_k': (Number(gasAvgCal)*three).toFixed(2),
+                'five_hundred_k': (Number(gasAvgCal)*four).toFixed(2),
+                'one_mil': (Number(gasAvgCal)*five).toFixed(2),
+                'ten_mil': (Number(gasAvgCal)*six).toFixed(2)
             },
 
             fast: {
-                '5k': (Number(gasFastCal)*one).toFixed(2),
-                '25k': (Number(gasFastCal)*two).toFixed(2),
-                '100k': (Number(gasFastCal)*three).toFixed(2),
-                '500k': (Number(gasFastCal)*four).toFixed(2),
-                '1m': (Number(gasFastCal)*five).toFixed(2),
-                '10m': (Number(gasFastCal)*six).toFixed(2)
+                'five_k': (Number(gasFastCal)*one).toFixed(2),
+                'twenty_five_k': (Number(gasFastCal)*two).toFixed(2),
+                'one_hundred_k': (Number(gasFastCal)*three).toFixed(2),
+                'five_hundred_k': (Number(gasFastCal)*four).toFixed(2),
+                'one_mil': (Number(gasFastCal)*five).toFixed(2),
+                'ten_mil': (Number(gasFastCal)*six).toFixed(2)
             }
         }
-    }]
+    }
 }
 
 function calcsSys(){
@@ -79,7 +81,7 @@ function calcsSys(){
     let sysSpt = 0.0001; // need to make this dynamic
     let sysTxUsd = sysUsd*sysSpt;
 
-    return[{
+    return{
 
         price:{
                 usd: Number(sysUsd).toFixed(4),
@@ -93,15 +95,15 @@ function calcsSys(){
         
         tx_costs_usd:{
             spt_tx: {
-                '5k': (Number(sysTxUsd)*5000).toFixed(2),
-                '25k': (Number(sysTxUsd)*25000).toFixed(2),
-                '100k': (Number(sysTxUsd)*100000).toFixed(2),
-                '500k': (Number(sysTxUsd)*500000).toFixed(2),
-                '1m': (Number(sysTxUsd)*1000000).toFixed(2),
-                '10m': (Number(sysTxUsd)*10000000).toFixed(2)  
+                'five_k': (Number(sysTxUsd)*5000).toFixed(2),
+                'twenty_five_k': (Number(sysTxUsd)*25000).toFixed(2),
+                'one_hundred_k': (Number(sysTxUsd)*100000).toFixed(2),
+                'five_hundred_k': (Number(sysTxUsd)*500000).toFixed(2),
+                'one_mil': (Number(sysTxUsd)*1000000).toFixed(2),
+                'ten_mil': (Number(sysTxUsd)*10000000).toFixed(2)  
             }
         }
-    }]
+    }
 }
 
 setInterval(async function statInfo(){
@@ -125,11 +127,11 @@ setInterval(async function statInfo(){
 },20000) // Checks every 20 secs
 
 app.get('/statsETH',(req,res)=>{
-  res.status(200).send({ethereum:calcsEth()})
+  res.status(200).send(calcsEth())
 })
 
 app.get('/statsSYS',(req,res)=>{
-  res.status(200).send({syscoin:calcsSys()})
+  res.status(200).send(calcsSys())
 })
 
 app.listen(3000, () => {
