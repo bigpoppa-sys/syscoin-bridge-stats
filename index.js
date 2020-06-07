@@ -9,8 +9,6 @@ let ethUsd = 0;
 let ethBtc = 0;
 let sysUsd = 0;
 let sysBtc = 0;
-let sysFive = 0;
-let ethFive = 0;
 
 function calcsEth(){ 
     let gasLimit = 21000;
