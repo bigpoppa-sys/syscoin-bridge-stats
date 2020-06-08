@@ -27,10 +27,12 @@ function calcsEth(){
     let four = 500000;
     let five = 1000000;
     let six = 10000000;
+    let sysSpt = 0.0001; // need to make this dynamic
+    let sysTxUsd = sysUsd*sysSpt;
 
     return{
 
-        price:{
+        eth_price:{
                 usd: Number(ethUsd).toFixed(2),
                 btc: Number(ethBtc).toFixed(8)
         },
@@ -48,7 +50,7 @@ function calcsEth(){
             }
         },
 
-        tx_costs_usd:{
+        eth_tx_costs:{
             low: {
                 'five_k': (Number(gasLowCal)*one).toFixed(2),
                 'twenty_five_k': (Number(gasLowCal)*two).toFixed(2),
@@ -75,18 +77,9 @@ function calcsEth(){
                 'one_mil': (Number(gasFastCal)*five).toFixed(2),
                 'ten_mil': (Number(gasFastCal)*six).toFixed(2)
             }
-        }
-    }
-}
+        },
 
-function calcsSys(){
-
-    let sysSpt = 0.0001; // need to make this dynamic
-    let sysTxUsd = sysUsd*sysSpt;
-
-    return{
-
-        price:{
+        sys_price:{
                 usd: Number(sysUsd).toFixed(4),
                 btc: Number(sysBtc).toFixed(8)
         },
@@ -96,14 +89,14 @@ function calcsSys(){
                 sys: Number(sysSpt).toFixed(8)
         },
         
-        tx_costs_usd:{
+        sys_tx_costs:{
             spt_tx: {
-                'five_k': (Number(sysTxUsd)*5000).toFixed(2),
-                'twenty_five_k': (Number(sysTxUsd)*25000).toFixed(2),
-                'one_hundred_k': (Number(sysTxUsd)*100000).toFixed(2),
-                'five_hundred_k': (Number(sysTxUsd)*500000).toFixed(2),
-                'one_mil': (Number(sysTxUsd)*1000000).toFixed(2),
-                'ten_mil': (Number(sysTxUsd)*10000000).toFixed(2)  
+                'five_k': (Number(sysTxUsd)*one).toFixed(2),
+                'twenty_five_k': (Number(sysTxUsd)*two).toFixed(2),
+                'one_hundred_k': (Number(sysTxUsd)*three).toFixed(2),
+                'five_hundred_k': (Number(sysTxUsd)*four).toFixed(2),
+                'one_mil': (Number(sysTxUsd)*five).toFixed(2),
+                'ten_mil': (Number(sysTxUsd)*six).toFixed(2)  
             }
         }
     }
@@ -129,16 +122,11 @@ setInterval(async function statInfo(){
 
 },20000) // Checks every 20 secs
 
-app.get('/statsETH',(req,res)=>{
+app.get('/stats',(req,res)=>{
   res.status(200).send(calcsEth())
 })
 
-app.get('/statsSYS',(req,res)=>{
-  res.status(200).send(calcsSys())
-})
-
-app.listen(3000, () => {
+app.listen(8000, () => {
  console.log("Bridge Stats now live");
- console.log("View at localhost:3000/statsETH");
- console.log("View at localhost:3000/statsSYS");
+ console.log("View at localhost:8000/stats");
 });
