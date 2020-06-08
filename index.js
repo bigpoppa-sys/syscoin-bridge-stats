@@ -86,11 +86,10 @@ function calcsEth(){
 
         spt_cost:{
                 usd: Number(sysTxUsd).toFixed(8),
-                sys: Number(sysSpt).toFixed(8)
+                sys: Number(sysSpt).toFixed(8),
         },
         
-        sys_tx_costs:{
-            spt_tx: {
+        spt_tx_cost: {
                 'five_k': (Number(sysTxUsd)*one).toFixed(2),
                 'twenty_five_k': (Number(sysTxUsd)*two).toFixed(2),
                 'one_hundred_k': (Number(sysTxUsd)*three).toFixed(2),
@@ -98,7 +97,6 @@ function calcsEth(){
                 'one_mil': (Number(sysTxUsd)*five).toFixed(2),
                 'ten_mil': (Number(sysTxUsd)*six).toFixed(2)  
             }
-        }
     }
 }
 
