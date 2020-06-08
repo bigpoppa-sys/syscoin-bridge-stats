@@ -1,6 +1,11 @@
 var express = require("express");
 var app = express();
 var axios = require('axios');
+var cors = require('cors');
+var bodyParser = require('body-parser');
+
+app.use(cors({origin:"*",optionsSuccessStatus: 200}))
+app.use(bodyParser.json())
 
 let gasLow = 0;
 let gasAvg = 0;
