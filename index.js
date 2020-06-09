@@ -3,6 +3,18 @@ var app = express();
 var axios = require('axios');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+const https = require('https');
+const fs = require('fs');
+const options = {
+    host: 'localhost',
+    port: 8000,
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert'),
+    rejectUnauthorized: false,
+    requestCert: true,
+    agent: false
+};
+var httpsServer = https.createServer(options, app);
 
 app.use(cors({origin:"*",optionsSuccessStatus: 200}))
 app.use(bodyParser.json())
@@ -15,7 +27,7 @@ let ethBtc = 0;
 let sysUsd = 0;
 let sysBtc = 0;
 
-function calcsEth(){ 
+function calcs(){ 
     let gasLimit = 21000;
     let bigNr = 10000000000;
     let gasLowCal = gasLow/bigNr*gasLimit*ethUsd;
@@ -121,10 +133,10 @@ setInterval(async function statInfo(){
 },20000) // Checks every 20 secs
 
 app.get('/stats',(req,res)=>{
-  res.status(200).send(calcsEth())
+  res.status(200).send(calcs())
 })
 
-app.listen(8000, () => {
- console.log("Bridge Stats now live");
- console.log("View at localhost:8000/stats");
-});
+httpsServer.listen(8000, () => {
+    console.log("Bridge Stats now live");
+    console.log("View at https://localhost:8000/stats")
+})
